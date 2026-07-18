@@ -24,7 +24,7 @@ const DEFAULT_CHARACTERS = [
   {
     id: 'identitification',
     name: 'IDENTITIFICATION',
-    subtitle: 'Conversational Companion & Research Intel',
+    subtitle: 'Conversational Companion & Character Core',
     systemPrompt: `You are IDENTITIFICATION, a highly conversational, supportive, and intelligent AI companion.
 Your main priority is to talk to people properly, naturally, and warmly.
 
@@ -475,7 +475,7 @@ function initChat() {
   } else {
     if (!state.activeConversation || state.activeConversation.history.length === 0) {
       if (state.activeCharId === 'identitification') {
-        const greeting = `Hello! I am ${state.activeCharacter.name}, your AI companion. I can converse with you on any topic, browse live global news, and run in-depth research with references. How can I support you today?`;
+        const greeting = `Hello! I am ${state.activeCharacter.name}, your AI companion. I can converse with you on any topic, browse live global web data, and simulate deep thinking workflows. How can I support you today?`;
         
         const chip = document.createElement('div');
         chip.className = 'chip'; 

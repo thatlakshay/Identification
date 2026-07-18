@@ -514,7 +514,7 @@ async function gatherIntel(query, deepSearchActive, addStep, updateStep, removeC
   }
   
   if (scrapedResults.length > 0) {
-    contextBlock += 'LATEST RESEARCH & WEB ARTICLES:\n';
+    contextBlock += 'LATEST WEB CONTEXT & ARTICLES:\n';
     scrapedResults.forEach(res => {
       allSources.push({ title: res.title, url: res.url, source: res.source });
       const content = res.fullText || res.desc || 'No content available';
