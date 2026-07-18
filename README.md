@@ -34,6 +34,10 @@ Ankush AI is a premium, client-side intelligence dashboard and online research a
 ### 🖼️ 6. Circular Profile Picture Cropper
 * Upload custom avatars during sign-up or profile settings. Uses an inline `Cropper.js` overlay masked to a circular transparent PNG base64 representation.
 
+### 🦎 7. Animated Cyber-Chameleon Branding & HUD
+* **Dynamic Micro-Animations:** SVG orbits spin in alternating directions, and the central eye pulses to create a live, responsive tech aesthetic.
+* **Theme-Bound Adaptation:** Automatically coordinates with custom accent color selections (Cyan, Sapphire, Emerald, Amethyst, Crimson, Solar Gold) by referencing root CSS variables inside the inline vector paths.
+
 ---
 
 ## 🛠️ Technology Stack
@@ -59,6 +63,6 @@ To run the application locally without configuration issues:
 ## 📁 File Structure
 
 * `index.html` — Core application file containing all layout HTML, styling CSS, and JS logic.
-* `ankush_logo.svg` — Custom wave logo used in avatars and stream loaders.
+* `ankush_logo.svg` — Premium glowing cyber-chameleon logo used in UI headers and favicons.
 * `run.bat` — Automated command launcher for development servers.
 * `vercel.json` — Vercel single-page application routing configurations.
