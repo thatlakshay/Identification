@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#09090b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Identitification — Character AI Console</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300e5ff'/%3E%3Cstop offset='100%25' stop-color='%233866f2'/%3E%3C/linearGradient%3E%3Cfilter id='glow'%3E%3CfeGaussianBlur stdDeviation='3' result='blur'/%3E%3CfeMerge%3E%3CfeMergeNode in='blur'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cg fill='none' stroke='%2300e5ff' stroke-width='1.5' stroke-linecap='round' opacity='0.7'%3E%3Cpath d='M 39.5 16 L 50 10 L 60.5 16 M 39.5 84 L 50 90 L 60.5 84 M 74.5 24 L 85 30 L 85 42 M 85 58 L 85 70 L 74.5 76 M 25.5 24 L 15 30 L 15 42 M 15 58 L 15 70 L 25.5 76'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='url(%23g)' stroke-width='1' stroke-dasharray='8 16' opacity='0.35'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='url(%23g)' stroke-width='1' stroke-dasharray='40 10 10 10' opacity='0.45'/%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M 18 36 C 25 22, 50 18, 68 28 C 85 38, 90 60, 80 75 C 70 90, 48 90, 42 78 C 36 66, 48 55, 58 60 C 66 64, 68 74, 60 76 C 56 77, 54 73, 56 70 C 58 67, 62 68, 61 71' stroke='url(%23g)' stroke-width='4.5'/%3E%3Cpath d='M 18 36 C 14 44, 18 56, 28 62 C 38 68, 48 64, 48 64' stroke='url(%23g)' stroke-width='4.5'/%3E%3Cpath d='M 30 25 C 38 18, 52 18, 64 24' stroke='url(%23g)' stroke-width='3' stroke-dasharray='1 7'/%3E%3C/g%3E%3Ccircle cx='28' cy='46' r='7.5' fill='none' stroke='%2300e5ff' stroke-width='2' opacity='0.6'/%3E%3Ccircle cx='28' cy='46' r='2.5' fill='%23ffffff' filter='url(%23glow)'/%3E%3C/svg%3E">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+  
+  <!-- Premium External Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+</head>
+<body>
+
+  <!-- ── GUEST / SIGN IN GATEWAY PORTAL ── -->
+  <div id="login-overlay" style="display: none;">
+    <div class="glow-sphere glow-sphere-1"></div>
+    <div class="glow-sphere glow-sphere-2"></div>
+    <div class="grid-overlay"></div>
+
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-icon-box">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="logo-glow-white" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <style>
+              @keyframes logo-spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+              @keyframes logo-spin-reverse {
+                0% { transform: rotate(360deg); }
+                100% { transform: rotate(0deg); }
+              }
+              @keyframes logo-pulse {
+                0%, 100% { opacity: 0.75; transform: scale(1); }
+                50% { opacity: 1; transform: scale(1.06); }
+              }
+              .spinning-orbit-1 {
+                transform-origin: 50px 50px;
+                animation: logo-spin 20s linear infinite;
+              }
+              .spinning-orbit-2 {
+                transform-origin: 50px 50px;
+                animation: logo-spin-reverse 15s linear infinite;
+              }
+              .glowing-eye {
+                transform-origin: 28px 46px;
+                animation: logo-pulse 2s ease-in-out infinite;
+              }
+            </style>
+            <!-- Futuristic Corner HUD Frame (Glow layer) -->
+            <g fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" filter="url(#logo-glow-white)" opacity="0.2">
+              <path d="M 39.5 16 L 50 10 L 60.5 16" />
+              <path d="M 39.5 84 L 50 90 L 60.5 84" />
+              <path d="M 74.5 24 L 85 30 L 85 42" />
+              <path d="M 85 58 L 85 70 L 74.5 76" />
+              <path d="M 25.5 24 L 15 30 L 15 42" />
+              <path d="M 15 58 L 15 70 L 25.5 76" />
+            </g>
+            <!-- Futuristic Corner HUD Frame (Crisp layer) -->
+            <g fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.5">
+              <path d="M 39.5 16 L 50 10 L 60.5 16" />
+              <path d="M 39.5 84 L 50 90 L 60.5 84" />
+              <path d="M 74.5 24 L 85 30 L 85 42" />
+              <path d="M 85 58 L 85 70 L 74.5 76" />
+              <path d="M 25.5 24 L 15 30 L 15 42" />
+              <path d="M 15 58 L 15 70 L 25.5 76" />
+            </g>
+            <!-- Background Rotating Orbits -->
+            <g class="spinning-orbit-1" opacity="0.25">
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="8 16" />
+              <circle cx="50" cy="12" r="1.5" fill="#ffffff" />
+            </g>
+            <g class="spinning-orbit-2" opacity="0.3">
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="40 10 10 10" />
+              <circle cx="50" cy="20" r="1" fill="#ffffff" />
+            </g>
+            <!-- Glowing Chameleon Body (Back Glow) -->
+            <g fill="none" stroke="#ffffff" stroke-linecap="round" filter="url(#logo-glow-white)" opacity="0.25">
+              <path d="M 18 36 C 25 22, 50 18, 68 28 C 85 38, 90 60, 80 75 C 70 90, 48 90, 42 78 C 36 66, 48 55, 58 60 C 66 64, 68 74, 60 76 C 56 77, 54 73, 56 70 C 58 67, 62 68, 61 71" stroke-width="7" />
+              <path d="M 18 36 C 14 44, 18 56, 28 62 C 38 68, 48 64, 48 64" stroke-width="7" />
+              <path d="M 30 25 C 38 18, 52 18, 64 24" stroke-width="4.5" stroke-dasharray="1 8" />
+            </g>
+            <!-- Crisp Chameleon Body (Front Layer) -->
+            <g fill="none" stroke="#ffffff" stroke-linecap="round" opacity="0.75">
+              <path d="M 18 36 C 25 22, 50 18, 68 28 C 85 38, 90 60, 80 75 C 70 90, 48 90, 42 78 C 36 66, 48 55, 58 60 C 66 64, 68 74, 60 76 C 56 77, 54 73, 56 70 C 58 67, 62 68, 61 71" stroke-width="4" />
+              <path d="M 18 36 C 14 44, 18 56, 28 62 C 38 68, 48 64, 48 64" stroke-width="4" />
+              <path d="M 30 25 C 38 18, 52 18, 64 24" stroke-width="2.5" stroke-dasharray="1 7" />
+            </g>
+            <!-- Eye of the Chameleon -->
+            <g class="glowing-eye">
+              <circle cx="28" cy="46" r="7.5" fill="none" stroke="#ffffff" stroke-width="2" filter="url(#logo-glow-white)" opacity="0.5" />
+              <circle cx="28" cy="46" r="4.5" fill="none" stroke="#ffffff" stroke-width="1" />
+              <circle cx="28" cy="46" r="2" fill="#ffffff" />
+            </g>
+          </svg>
+        </div>
+        <div class="login-title">IDENTITIFICATION</div>
+      </div>
+      <div id="login-subtitle-txt" class="login-subtitle">Character AI Console</div>
+      
+      <div class="login-views-container">
+        
+        <!-- LOGIN VIEW -->
+        <div id="login-view-main" class="login-view active">
+          <p class="login-desc">Provide your email credentials to initialize your intelligence dashboard.</p>
+          
+          <div id="login-error-alert" class="file-warning">
+            <div class="file-warning-title">
+              <span>⚠️</span> Sign In Failed
+            </div>
+            <div id="login-error-msg" class="file-warning-desc">
+              Invalid credentials.
+            </div>
+          </div>
+          
+          <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="login-email" class="login-input" placeholder="e.g. director@company.com" required autocomplete="off">
+            </div>
+            <div class="input-group">
+              <label class="form-label">Password</label>
+              <input type="password" id="login-password" class="login-input" placeholder="••••••••" required autocomplete="off">
+            </div>
+            <button type="submit" class="login-btn-premium">Sign In</button>
+          </form>
+          
+          <div class="login-footer-text">
+            New to Identitification? <a href="#" class="login-footer-link" onclick="showRegisterView(); return false;">Register an account</a>
+          </div>
+        </div>
+
+        <!-- REGISTER VIEW -->
+        <div id="login-view-register" class="login-view">
+          <p class="login-desc">Create a local account profile to setup the customized console.</p>
+          
+          <div id="register-error-alert" class="file-warning">
+            <div class="file-warning-title">
+              <span>⚠️</span> Registration Failed
+            </div>
+            <div id="register-error-msg" class="file-warning-desc">
+              Email already exists.
+            </div>
+          </div>
+          
+          <form onsubmit="handleRegister(event)">
+            <div class="input-group">
+              <label class="form-label">Display Username</label>
+              <input type="text" id="register-username" class="login-input" placeholder="e.g. Director" required autocomplete="off">
+            </div>
+            <div class="input-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" id="register-email" class="login-input" placeholder="e.g. director@company.com" required autocomplete="off">
+            </div>
+            <div class="input-group">
+              <label class="form-label">Password</label>
+              <input type="password" id="register-password" class="login-input" placeholder="••••••••" required autocomplete="off">
+            </div>
+            <div class="input-group">
+              <label class="form-label">Profile Photo (Optional)</label>
+              <input type="file" id="register-pfp-file" accept="image/*" onchange="handleRegisterPfpUpload(event)" style="width: 100%; border: none; padding: 4px 0; background: transparent; color: #a1a1aa; font-size: 0.8rem;">
+              <input type="hidden" id="register-pfp-data" value="">
+              
+              <div id="register-pfp-preview-container" style="display: none; align-items: center; gap: 12px; margin-top: 12px;">
+                <div id="register-pfp-preview" style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; flex-shrink: 0; overflow: hidden;"></div>
+                <span style="font-size: 0.75rem; color: #a1a1aa;">Circular avatar cropped & ready!</span>
+              </div>
+            </div>
+            <button type="submit" class="login-btn-premium">Register Account</button>
+          </form>
+          
+          <div class="login-footer-text">
+            Already have an account? <a href="#" class="login-footer-link" onclick="showLoginView(); return false;">Sign In</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CORE APPLICATION FRAMEWORK ── -->
+  <div id="app-container">
+    
+    <!-- Ambient glowing backgrounds -->
+    <div class="glow-sphere glow-sphere-1"></div>
+    <div class="glow-sphere glow-sphere-2"></div>
+    <div class="grid-overlay"></div>
+    
+    <!-- ── SIDEBAR DRAWER ── -->
+    <div id="sidebar">
+      <div id="sidebar-hdr">
+        <svg viewBox="0 0 100 100" width="32" height="32" style="overflow: visible;" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-cyan)" />
+              <stop offset="100%" stop-color="var(--accent)" />
+            </linearGradient>
+            <linearGradient id="logo-gradient-alt" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-cyan)" />
+              <stop offset="100%" stop-color="var(--accent)" />
+            </linearGradient>
+            <filter id="logo-glow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="logo-glow-soft" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <style>
+            @keyframes logo-spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+            @keyframes logo-spin-reverse {
+              0% { transform: rotate(360deg); }
+              100% { transform: rotate(0deg); }
+            }
+            @keyframes logo-pulse {
+              0%, 100% { opacity: 0.75; transform: scale(1); }
+              50% { opacity: 1; transform: scale(1.06); }
+            }
+            .spinning-orbit-1 {
+              transform-origin: 50px 50px;
+              animation: logo-spin 20s linear infinite;
+            }
+            .spinning-orbit-2 {
+              transform-origin: 50px 50px;
+              animation: logo-spin-reverse 15s linear infinite;
+            }
+            .glowing-eye {
+              transform-origin: 28px 46px;
+              animation: logo-pulse 2s ease-in-out infinite;
+            }
+          </style>
+
+          <!-- Futuristic Corner HUD Frame (Glow layer) -->
+          <g fill="none" stroke="var(--accent-cyan)" stroke-width="4" stroke-linecap="round" filter="url(#logo-glow)" opacity="0.25">
+            <path d="M 39.5 16 L 50 10 L 60.5 16" />
+            <path d="M 39.5 84 L 50 90 L 60.5 84" />
+            <path d="M 74.5 24 L 85 30 L 85 42" />
+            <path d="M 85 58 L 85 70 L 74.5 76" />
+            <path d="M 25.5 24 L 15 30 L 15 42" />
+            <path d="M 15 58 L 15 70 L 25.5 76" />
+          </g>
+
+          <!-- Futuristic Corner HUD Frame (Crisp layer) -->
+          <g fill="none" stroke="url(#logo-gradient)" stroke-width="1.2" stroke-linecap="round" opacity="0.7">
+            <path d="M 39.5 16 L 50 10 L 60.5 16" />
+            <path d="M 39.5 84 L 50 90 L 60.5 84" />
+            <path d="M 74.5 24 L 85 30 L 85 42" />
+            <path d="M 85 58 L 85 70 L 74.5 76" />
+            <path d="M 25.5 24 L 15 30 L 15 42" />
+            <path d="M 15 58 L 15 70 L 25.5 76" />
+          </g>
+
+          <!-- Background Rotating Orbits -->
+          <g class="spinning-orbit-1" opacity="0.35">
+            <circle cx="50" cy="50" r="38" fill="none" stroke="url(#logo-gradient)" stroke-width="1" stroke-dasharray="8 16" />
+            <circle cx="50" cy="12" r="2" fill="var(--accent-cyan)" />
+          </g>
+          <g class="spinning-orbit-2" opacity="0.45">
+            <circle cx="50" cy="50" r="30" fill="none" stroke="url(#logo-gradient-alt)" stroke-width="1" stroke-dasharray="40 10 10 10" />
+            <circle cx="50" cy="20" r="1.5" fill="#ffffff" />
+          </g>
+
+          <!-- Glowing Chameleon Body (Back Glow) -->
+          <g fill="none" stroke="var(--accent-cyan)" stroke-linecap="round" filter="url(#logo-glow)" opacity="0.35">
+            <path d="M 18 36 C 25 22, 50 18, 68 28 C 85 38, 90 60, 80 75 C 70 90, 48 90, 42 78 C 36 66, 48 55, 58 60 C 66 64, 68 74, 60 76 C 56 77, 54 73, 56 70 C 58 67, 62 68, 61 71" stroke-width="8" />
+            <path d="M 18 36 C 14 44, 18 56, 28 62 C 38 68, 48 64, 48 64" stroke-width="8" />
+            <path d="M 30 25 C 38 18, 52 18, 64 24" stroke-width="5" stroke-dasharray="1 8" />
+          </g>
+
+          <!-- Crisp Chameleon Body (Front Gradient Layer) -->
+          <g fill="none" stroke-linecap="round">
+            <path d="M 18 36 C 25 22, 50 18, 68 28 C 85 38, 90 60, 80 75 C 70 90, 48 90, 42 78 C 36 66, 48 55, 58 60 C 66 64, 68 74, 60 76 C 56 77, 54 73, 56 70 C 58 67, 62 68, 61 71" stroke="url(#logo-gradient)" stroke-width="4.5" />
+            <path d="M 18 36 C 14 44, 18 56, 28 62 C 38 68, 48 64, 48 64" stroke="url(#logo-gradient)" stroke-width="4.5" />
+            <path d="M 30 25 C 38 18, 52 18, 64 24" stroke="url(#logo-gradient-alt)" stroke-width="3" stroke-dasharray="1 7" />
+          </g>
+
+          <!-- Eye of the Chameleon (Futuristic Target Core) -->
+          <g class="glowing-eye">
+            <circle cx="28" cy="46" r="8" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5" filter="url(#logo-glow)" opacity="0.6" />
+            <circle cx="28" cy="46" r="5" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" />
+            <circle cx="28" cy="46" r="2.5" fill="#ffffff" filter="url(#logo-glow-soft)" />
+          </g>
+        </svg>
+        <div style="display: flex; flex-direction: column;">
+          <span class="logo-text">IDENTITIFICATION</span>
+          <span class="logo-sub">Character AI</span>
+        </div>
+      </div>
+      
+      <button class="new-chat-btn" onclick="startNewConversation()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        New Session
+      </button>
+      
+      <div class="sidebar-section">
+        <div class="section-title">Chat History</div>
+        <div id="sidebar-history-list">
+          <!-- Past chats render here -->
+        </div>
+      </div>
+      
+      <div class="sidebar-section" style="max-height: 200px; border-top: 1px solid var(--border-side); padding-top: 14px; margin-bottom: 8px;">
+        <div class="section-title">AI Characters</div>
+        <div id="sidebar-character-list">
+          <!-- Rendered dynamically -->
+        </div>
+        <button class="add-char-btn" onclick="openCreateCharModal()">+ Create Character</button>
+      </div>
+      
+      <div id="sidebar-footer">
+        <button class="footer-btn" onclick="openModal('profile-modal')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          Profile Settings
+        </button>
+        <button class="footer-btn" onclick="openModal('settings-modal')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          Change Model / API
+        </button>
+        
+        <div class="profile-bar">
+          <div class="profile-info">
+            <span class="profile-avatar" id="profile-avatar-char">G</span>
+            <span class="profile-name" id="profile-display-name">Guest</span>
+          </div>
+          <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MAIN CONTENT WORKSPACE ── -->
+    <div id="main-content">
+      
+      <!-- HEADER -->
+      <div id="hdr">
+        <div id="hdr-left">
+          <button id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Navigation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <span class="active-persona-name" id="active-persona-name">Identitification</span>
+        </div>
+        <div id="hdr-right">
+          <div class="model-badge" id="model-badge">
+            <span class="status-indicator"></span> Checking Status...
+          </div>
+        </div>
+      </div>
+      
+      <!-- LIVE SCANNER PROGRESS LOGS -->
+      <div id="status-bar"></div>
+      
+      <!-- BRIEFINGS FEED -->
+      <div id="msgs">
+        <!-- Loaded dynamically -->
+      </div>
+      
+      <!-- INPUT PANEL CAPSULE -->
+      <div id="bottom">
+        <div id="prompt-container">
+          <div id="input-wrap">
+            <textarea id="inp" placeholder="Ask anything, research a topic..." rows="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+            
+            <button id="send" aria-label="Send query">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+          
+          <div id="prompt-controls">
+            <button id="deep-search-btn" class="prompt-toggle" onclick="toggleDeepSearch()">
+              <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              Deep Search
+            </button>
+            
+            <button id="deep-think-btn" class="prompt-toggle" onclick="toggleDeepThink()">
+              <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+              Deep Think
+            </button>
+            
+            <button id="incognito-btn" class="prompt-toggle" onclick="toggleIncognito()">
+              <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+              Incognito
+            </button>
+          </div>
+        </div>
+        <div id="input-hint">Enter to send &bull; Shift+Enter for new line &bull; Clear current logs by clicking <a href="#" onclick="clearChat(); return false;" style="color:var(--accent-cyan);text-decoration:underline;">Clear Chat</a></div>
+      </div>
+      
+    </div>
+
+    <!-- ── CUSTOM PERSONA DIALOG MODAL ── -->
+    <div id="personas-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-hdr">
+          <span id="char-modal-title">Create Agent Character</span>
+          <button class="modal-close" onclick="closeModal('personas-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="char-form" onsubmit="handleCharacterFormSubmit(event)">
+            <input type="hidden" id="char-action-mode" value="create">
+            <input type="hidden" id="char-edit-id" value="">
+            <div class="form-group">
+              <label>Character Name</label>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <input type="text" id="char-name" placeholder="e.g. SHERLOCK" required autocomplete="off" style="flex: 1; margin-bottom: 0;">
+                <button type="button" id="char-generate-btn" onclick="autoGenerateCharacterPrompt()" style="background: var(--accent-gradient); color: #fff; border: none; border-radius: 12px; padding: 10px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; white-space: nowrap; height: 38px;">
+                  <span>🪄</span> Auto-Generate
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Role / Subtitle</label>
+              <input type="text" id="char-subtitle" placeholder="e.g. Detective Consultant" required autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label>System instructions / Personality Prompt</label>
+              <textarea id="char-instructions" placeholder="How should this character behave, think, and talk to people?" rows="5" required></textarea>
+            </div>
+            <button type="submit" id="char-submit-btn" class="primary-btn">Create & Activate</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONFIGURATION & MODEL DIALOG MODAL ── -->
+    <div id="settings-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-hdr">
+          <span>Configure Connection Method</span>
+          <button class="modal-close" onclick="closeModal('settings-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="settings-form" onsubmit="saveSettings(event)">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label>Select Method</label>
+              <select id="settings-method" onchange="window.IdentitificationUI.toggleSettingsMethod(this.value)" style="width: 100%; cursor: pointer;">
+                <option value="online">Online Mode (Free & Keyless)</option>
+                <option value="offline">Offline Mode (Local Ollama)</option>
+                <option value="apikey">Custom API Key (OpenRouter / Groq)</option>
+              </select>
+            </div>
+
+            <!-- Online Mode Segment -->
+            <div id="sec-online" class="form-group" style="display: block;">
+              <div class="info-note" style="margin-bottom: 12px;">
+                <strong>⚡ Online Mode Activated:</strong> Runs query completions using free cloud models automatically. No tokens or API keys required.
+              </div>
+              <div class="form-group">
+                <label>Select Free Cloud Model</label>
+                <select id="settings-online-model" style="width: 100%; cursor: pointer;">
+                  <option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B Instruct (Factual & Detailed)</option>
+                  <option value="deepseek/deepseek-r1:free">DeepSeek R1 (Deep Reasoning & Accurate)</option>
+                  <option value="gemma3:27b">Gemma 3 27B (Fast & Balanced)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Offline Mode Segment -->
+            <div id="sec-offline" class="form-group" style="display: none;">
+              <div class="info-note" style="margin-bottom: 12px;">
+                <strong>🔌 Offline Mode Activated:</strong> Queries your local Ollama server directly. Ensure Ollama is running on your machine.
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label>Ollama Endpoint URL</label>
+                <input type="text" id="settings-local-url" placeholder="http://localhost:11434/v1/chat/completions">
+              </div>
+              <div class="form-group">
+                <label>Local Model Name</label>
+                <input type="text" id="settings-local-model" placeholder="e.g. deepseek-r1 or llama3">
+              </div>
+            </div>
+
+            <!-- API Key Segment -->
+            <div id="sec-apikey" class="form-group" style="display: none;">
+              <div class="info-note" style="margin-bottom: 12px;">
+                <strong>🔑 Custom API Key:</strong> Enter your credentials for OpenRouter or Groq. The engine auto-routes based on the prefix.
+              </div>
+              <div class="form-group" style="margin-bottom: 10px;">
+                <label>API Key / Token</label>
+                <input type="password" id="settings-custom-key" placeholder="Paste sk-or-... or gsk_...">
+              </div>
+              <div class="form-group">
+                <label>Model Identifier</label>
+                <input type="text" id="settings-custom-model" placeholder="e.g. google/gemini-2.5-flash:free">
+              </div>
+            </div>
+            </div>
+            
+            <!-- Theme & Custom Colors Segment -->
+            <div class="form-group" style="margin-top: 18px; border-top: 1px solid var(--border); padding-top: 14px;">
+              <label style="font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; display: block; color: var(--accent-cyan);">Theme Colors (Interface Customization)</label>
+              
+              <!-- Presets Grid -->
+              <div class="theme-presets-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+                <button type="button" class="theme-preset-btn" data-preset="cyan" onclick="selectThemePreset('cyan')" style="background: rgba(0,242,254,0.06); border: 1px solid var(--border); color: #00f2fe; padding: 8px 4px; border-radius: 8px; cursor: pointer; font-size: 0.72rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+                  <span style="width: 8px; height: 8px; background: #00f2fe; border-radius: 50%;"></span> Cyan Cyber
+                </button>
+                <button type="button" class="theme-preset-btn" data-preset="blue" onclick="selectThemePreset('blue')" style="background: rgba(56,102,242,0.06); border: 1px solid var(--border); color: #3866f2; padding: 8px 4px; border-radius: 8px; cursor: pointer; font-size: 0.72rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+                  <span style="width: 8px; height: 8px; background: #3866f2; border-radius: 50%;"></span> Sapphire
+                </button>
+                <button type="button" class="theme-preset-btn" data-preset="green" onclick="selectThemePreset('green')" style="background: rgba(16,163,127,0.06); border: 1px solid var(--border); color: #10a37f; padding: 8px 4px; border-radius: 8px; cursor: pointer; font-size: 0.72rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+                  <span style="width: 8px; height: 8px; background: #10a37f; border-radius: 50%;"></span> Emerald
+                </button>
+                <button type="button" class="theme-preset-btn" data-preset="purple" onclick="selectThemePreset('purple')" style="background: rgba(155,81,224,0.06); border: 1px solid var(--border); color: #9b51e0; padding: 8px 4px; border-radius: 8px; cursor: pointer; font-size: 0.72rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+                  <span style="width: 8px; height: 8px; background: #9b51e0; border-radius: 50%;"></span> Amethyst
+                </button>
+                <button type="button" class="theme-preset-btn" data-preset="red" onclick="selectThemePreset('red')" style="background: rgba(239,68,68,0.06); border: 1px solid var(--border); color: #ef4444; padding: 8px 4px; border-radius: 8px; cursor: pointer; font-size: 0.72rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+                  <span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%;"></span> Crimson
+                </button>
+                <button type="button" class="theme-preset-btn" data-preset="gold" onclick="selectThemePreset('gold')" style="background: rgba(242,201,76,0.06); border: 1px solid var(--border); color: #f2c94c; padding: 8px 4px; border-radius: 8px; cursor: pointer; font-size: 0.72rem; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;">
+                  <span style="width: 8px; height: 8px; background: #f2c94c; border-radius: 50%;"></span> Solar Gold
+                </button>
+              </div>
+
+              <!-- Custom Color Picker -->
+              <div style="display: flex; gap: 12px; align-items: center; margin-top: 10px;">
+                <div style="flex: 1; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px;">
+                  <span style="font-size: 0.75rem; color: var(--text-dim);">Custom Accent Color:</span>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span id="custom-color-hex" style="font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim);">#00f2fe</span>
+                    <input type="color" id="theme-color-primary" oninput="handleCustomColorInput(this.value)" style="background: transparent; border: none; cursor: pointer; width: 26px; height: 26px; border-radius: 4px; overflow: hidden; padding: 0;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button type="submit" class="primary-btn" style="margin-top: 14px;">Save Configuration</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROFILE SETTINGS DIALOG MODAL ── -->
+    <div id="profile-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-hdr">
+          <span>Profile Settings</span>
+          <button class="modal-close" onclick="closeModal('profile-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="profile-form" onsubmit="saveProfileSettings(event)">
+            <div class="form-group">
+              <label>Display Username</label>
+              <input type="text" id="profile-settings-username" required autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label>Upload Profile Photo</label>
+              <input type="file" id="profile-settings-pfp-file" accept="image/*" onchange="handleProfilePfpUpload(event)" style="width: 100%; border: none; padding: 4px 0; background: transparent; color: var(--text-dim); font-size: 0.85rem;">
+              
+              <div id="profile-pfp-preview-container" style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
+                <div id="profile-pfp-preview" style="width: 44px; height: 44px; border-radius: 50%; background: var(--accent-gradient); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; flex-shrink: 0; overflow: hidden;"></div>
+                <span style="font-size: 0.78rem; color: var(--text-dim);" id="profile-pfp-preview-status">Active profile photo</span>
+              </div>
+            </div>
+            <button type="submit" class="primary-btn">Save Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GLOBAL IMAGE CROPPER DIALOG MODAL ── -->
+    <div id="cropper-modal" class="modal-overlay" style="display: none; position: fixed; z-index: 300; background: rgba(0, 0, 0, 0.75);">
+      <div class="modal-content" style="max-width: 440px;">
+        <div class="modal-hdr">
+          <span>Crop Profile Picture</span>
+          <button class="modal-close" onclick="closeCropperModal()">&times;</button>
+        </div>
+        <div class="modal-body" style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="width: 100%; max-height: 280px; background: #000; border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+            <img id="cropper-image" alt="Upload Crop Preview" style="max-width: 100%; max-height: 280px; display: block;">
+          </div>
+          <div style="display: flex; gap: 12px; width: 100%; margin-top: 10px;">
+            <button type="button" class="primary-btn" style="flex: 1; background: transparent; border: 1.5px solid var(--border); color: var(--text-dim);" onclick="closeCropperModal()">Cancel</button>
+            <button type="button" class="primary-btn" style="flex: 1;" onclick="applyCrop()">Crop & Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main Script Sequence -->
+  <script src="./js/identitification-cropper.js"></script>
+  <script src="./js/identitification-search.js"></script>
+  <script src="./js/identitification-api.js"></script>
+  <script src="./js/identitification-ui.js"></script>
+  <script src="./js/identitification-app.js"></script>
+</body>
+</html>
